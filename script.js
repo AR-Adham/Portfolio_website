@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     clearTimeout(hideTimeout);
     hideTimeout = setTimeout(() => {
       nav.classList.add('hidden-nav');
-    }, 5000);
+    }, 3500);
   }
   function hideNav() {
     nav.classList.add('hidden-nav');
@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // --- typing effect ---
   const suffixes = [
-    "mechanical engineer Student",
-    "software developer",
-    "team leader",
-    "CAD expert",
-    "mechanical designer"
+    "mechanical engineering student.",
+    "software developer.",
+    "mechanical designer.",
+    "CAD expert.",
+    "overall fun guy."
   ];
   const typedTextEl = document.getElementById('typed-text');
   const prefix = "I am a ";
