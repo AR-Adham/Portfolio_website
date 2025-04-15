@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
   // --- Typing effect ---
   const suffixes = [
-    "mechanical engineer Student",
-    "software developer",
-    "team leader",
-    "CAD expert",
-    "mechanical designer"
+    "mechanical engineering student.",
+    "software developer.",
+    "mechanical designer.",
+    "CAD expert.",
+    "Overall Fun guy."
   ];
   const typedTextEl = document.getElementById('typed-text');
-  const prefix = "I am a ";
+  const prefix = "";
   let idx = 0, letter = 0, typing = true;
 
   function typeLoop() {
