@@ -73,3 +73,43 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+// Add the following JavaScript code to toggle navigation links on mobile
+
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelector('.nav-links');
+  const hamburger = document.createElement('div');
+  hamburger.classList.add('hamburger');
+  hamburger.innerHTML = '&#9776;'; // Hamburger icon (three lines)
+  
+  // Add the hamburger icon to the navigation bar
+  const navBar = document.querySelector('.nav-bar');
+  navBar.insertBefore(hamburger, navLinks);
+
+  // Toggle the visibility of the nav links when the hamburger is clicked
+  hamburger.addEventListener('click', function() {
+    navLinks.classList.toggle('active');
+  });
+});
+
+// Add the following CSS for the hamburger icon and toggling
+/* Hamburger menu styling */
+.hamburger {
+  font-size: 30px;
+  display: none; /* Initially hidden */
+  cursor: pointer;
+}
+
+/* Show hamburger on mobile */
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: block; /* Show hamburger icon on mobile */
+  }
+
+  .nav-links.active {
+    display: flex; /* Show the links when hamburger is clicked */
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
