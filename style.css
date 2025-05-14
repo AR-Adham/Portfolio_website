@@ -20,7 +20,7 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 0 40px; /* space before content on sides */
+  padding: 0 40px;
   background: rgba(28,28,30,0.8);
   z-index: 1000;
 }
@@ -58,42 +58,10 @@ body {
   color: #ffa500;
 }
 
-/* Hero Section */
-.hero {
-  text-align: center;
-  padding: 100px 0;
-  background-image: url('hero.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-
-.hero p {
-  font-size: 1.5rem;
-}
-
-/* Media Queries for Mobile Responsiveness */
-
-/* Mobile Navigation */
+/* Mobile Navigation - Hide links on small screens */
 @media screen and (max-width: 768px) {
-  .nav-bar {
-    flex-direction: column;
-    padding: 10px 20px;
-  }
-
   .nav-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  .nav-links li {
-    margin: 10px 0;
+    display: none; /* Hide the navigation links */
   }
 
   .logo {
@@ -125,3 +93,4 @@ img {
     font-size: 1.2rem;
   }
 }
+
