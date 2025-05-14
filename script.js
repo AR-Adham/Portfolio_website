@@ -1,9 +1,11 @@
+// script.js
+
 document.addEventListener('DOMContentLoaded', function() {
   // --- Typing effect ---
   const suffixes = [
-    "mechanical engineering student.",
-    "software developer.",
-    "mechanical designer.",
+    "Mechanical engineering student.",
+    "Software developer.",
+    "Mechanical designer.",
     "CAD expert.",
     "Overall Fun guy."
   ];
@@ -38,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
   function showNav() {
     nav.classList.remove('hidden-nav');
     clearTimeout(hideTimeout);
-    // only auto‑hide if scrolled down past 50px
     if (window.scrollY > 50) {
       hideTimeout = setTimeout(() => {
         nav.classList.add('hidden-nav');
@@ -47,68 +48,46 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function hideNav() {
-    // only hide if scrolled past 50px
     if (window.scrollY > 50) {
       nav.classList.add('hidden-nav');
     }
   }
 
-  // Initially show navbar
   showNav();
-
-  // On scroll: show if at top, else hide after delay
   window.addEventListener('scroll', () => {
-    if (window.scrollY <= 50) {
-      showNav();
-    } else {
-      hideNav();
-    }
+    window.scrollY <= 50 ? showNav() : hideNav();
   });
-
-  // On mouse move: if near top 10% of viewport, show
   document.addEventListener('mousemove', (e) => {
-    const threshold = window.innerHeight * 0.10;
-    if (e.clientY < threshold) {
-      showNav();
-    }
+    if (e.clientY < window.innerHeight * 0.10) showNav();
   });
-});
 
-// Add the following JavaScript code to toggle navigation links on mobile
-
-document.addEventListener('DOMContentLoaded', function() {
+  // --- Hamburger toggle (mobile only) ---
   const navLinks = document.querySelector('.nav-links');
-  const hamburger = document.createElement('div');
-  hamburger.classList.add('hamburger');
-  hamburger.innerHTML = '&#9776;'; // Hamburger icon (three lines)
-  
-  // Add the hamburger icon to the navigation bar
   const navBar = document.querySelector('.nav-bar');
-  navBar.insertBefore(hamburger, navLinks);
 
-  // Toggle the visibility of the nav links when the hamburger is clicked
-  hamburger.addEventListener('click', function() {
-    navLinks.classList.toggle('active');
-  });
+  function updateHamburger() {
+    const existing = document.querySelector('.hamburger');
+    if (window.innerWidth <= 768) {
+      // create if missing
+      if (!existing) {
+        const hamburger = document.createElement('div');
+        hamburger.classList.add('hamburger');
+        hamburger.innerHTML = '&#9776;'; // ☰
+        navBar.insertBefore(hamburger, navLinks);
+        hamburger.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+        });
+      }
+    } else {
+      // remove on desktop
+      if (existing) {
+        existing.remove();
+        navLinks.classList.remove('active');
+      }
+    }
+  }
+
+  // init and on resize
+  updateHamburger();
+  window.addEventListener('resize', updateHamburger);
 });
-
-// Add the following CSS for the hamburger icon and toggling
-/* Hamburger menu styling */
-.hamburger {
-  font-size: 30px;
-  display: none; /* Initially hidden */
-  cursor: pointer;
-}
-
-/* Show hamburger on mobile */
-@media screen and (max-width: 768px) {
-  .hamburger {
-    display: block; /* Show hamburger icon on mobile */
-  }
-
-  .nav-links.active {
-    display: flex; /* Show the links when hamburger is clicked */
-    flex-direction: column;
-    align-items: center;
-  }
-}
