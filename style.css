@@ -65,13 +65,18 @@ body {
 /* Hamburger menu styling */
 .hamburger {
   font-size: 30px;
-  display: none; /* desktop: hidden */
+  display: none;       /* desktop: hidden */
   cursor: pointer;
   user-select: none;
 }
 
-@media only screen and (max-width: 768px), only screen and (max-device-width: 768px) {
-  .hamburger { display: block; }
+@media only screen and (max-width: 768px) {
+  /* show the ☰ on mobile */
+  .hamburger {
+    display: block !important;
+  }
+
+  /* position the link row centrally under navbar */
   .nav-links {
     display: none;
     position: absolute;
@@ -85,17 +90,19 @@ body {
     white-space: nowrap;
     gap: 2rem;
   }
-  .nav-links.active { display: flex; }
-  .nav-links li { margin: 0; }
+  .nav-links.active {
+    display: flex;
+  }
+  .nav-links li {
+    margin: 0;
+  }
   .nav-links a {
+    padding: 0.5rem 0;
     font-size: 0.9rem;
     color: #fff;
     text-decoration: none;
-    padding: 0.5rem 0;
   }
 }
-
-.icon { margin-left: 1rem; font-size: 1.2rem; color: #fff; text-decoration: none; }
 
 /* Hero */
 .hero {
