@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
   // --- Typing effect ---
   const suffixes = [
-    "mechanical engineering student.",
-    "software developer.",
-    "mechanical designer.",
+    "Mechanical engineering student.",
+    "Software developer.",
+    "Mechanical designer.",
     "CAD expert.",
     "Overall Fun guy."
   ];
