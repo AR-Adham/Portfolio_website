@@ -66,16 +66,18 @@ body {
 /* always hide by default on desktop */
 .hamburger {
   display: none;
-  font-size: 30px;
+  font-size: 2rem;
+  color: #fff !important;      /* force white color */
   cursor: pointer;
-  user-select: none;
+  z-index: 1001;               /* above your nav-bar */
 }
 
-/* show on mobile */
+/* mobile: show it */
 @media only screen and (max-width: 768px) {
   .hamburger {
     display: block;
   }
+
   .nav-links {
     display: none;
     position: absolute;
@@ -90,7 +92,7 @@ body {
     gap: 2rem;
   }
   .nav-links.active {
-    display: flex;
+    display: flex !important;
   }
   .nav-links li {
     margin: 0;
