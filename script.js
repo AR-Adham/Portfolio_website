@@ -56,8 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // --- Hamburger toggle (mobile only) ---
-document.addEventListener('DOMContentLoaded', () => {
-  // …keep your typing + show/hide logic here…
 
   // 2. Simple toggle only
   const hamburger = document.querySelector('.hamburger');
