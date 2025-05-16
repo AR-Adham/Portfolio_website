@@ -211,28 +211,17 @@ footer p { color: #555; font-size: 0.9rem; }
 .hamburger {
   display: none;
   font-size: 2rem;
-  color: #fff !important;  /* force white */
-  position: absolute;
-  right: 2rem;             /* match your padding */
-  top: 50%;
-  transform: translateY(-50%);
+  color: #fff !important;
   cursor: pointer;
-  z-index: 2000;
+  user-select: none;
+  z-index: 1001;
 }
 
-/* desktop: always show links in a row */
-.nav-links {
-  display: flex;
-  gap: 1rem;
-  position: static;
-}
-
-/* mobile: show ☰, hide links until toggled */
+/* Mobile: show ☰, hide links until toggle */
 @media only screen and (max-width: 768px) {
   .hamburger {
     display: block;
   }
-
   .nav-links {
     display: none;
     position: absolute;
@@ -240,7 +229,7 @@ footer p { color: #555; font-size: 0.9rem; }
     left: 50%;
     transform: translateX(-50%);
     background: rgba(28,28,30,0.9);
-    flex-direction: row;     /* keep them in one line */
+    flex-direction: row;
     justify-content: center;
     gap: 2rem;
     padding: 0.5rem 1rem;
@@ -249,13 +238,4 @@ footer p { color: #555; font-size: 0.9rem; }
   .nav-links.active {
     display: flex !important;
   }
-  .nav-links li {
-    margin: 0;
-  }
-  .nav-links a {
-    color: #fff;
-    font-size: 0.9rem;
-    text-decoration: none;
-  }
 }
-
