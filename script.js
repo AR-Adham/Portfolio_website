@@ -54,15 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('mousemove', (e) => {
     if (e.clientY < window.innerHeight * 0.1) showNav();
   });
-
-  // --- Hamburger toggle (mobile only) ---
-
-  // 2. Simple toggle only
-  const hamburger = document.querySelector('.hamburger');
-  const navLinks = document.querySelector('.nav-links');
+const hamburger = document.querySelector('.hamburger');
+  const navLinks  = document.querySelector('.nav-links');
   hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
   });
-
-  // (no injection logic needed anymore)
 });
