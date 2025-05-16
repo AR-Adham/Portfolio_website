@@ -56,10 +56,16 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // --- Hamburger toggle (mobile only) ---
-const hamburger = document.querySelector('.hamburger');
+document.addEventListener('DOMContentLoaded', () => {
+  // …keep your typing + show/hide logic here…
+
+  // 2. Simple toggle only
+  const hamburger = document.querySelector('.hamburger');
   const navLinks  = document.querySelector('.nav-links');
 
   hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
   });
+
+  // (no injection logic needed anymore)
 });
