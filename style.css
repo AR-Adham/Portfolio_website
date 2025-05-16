@@ -63,20 +63,19 @@ body {
 }
 
 /* Hamburger menu styling */
+/* always hide by default on desktop */
 .hamburger {
+  display: none;
   font-size: 30px;
-  display: none;       /* desktop: hidden */
   cursor: pointer;
   user-select: none;
 }
 
+/* show on mobile */
 @media only screen and (max-width: 768px) {
-  /* show the ☰ on mobile */
   .hamburger {
-    display: block !important;
+    display: block;
   }
-
-  /* position the link row centrally under navbar */
   .nav-links {
     display: none;
     position: absolute;
