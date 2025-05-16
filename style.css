@@ -62,49 +62,6 @@ body {
   font-size: 0.9rem;
 }
 
-/* Hamburger menu styling */
-/* always hide by default on desktop */
-.hamburger {
-  display: none;
-  font-size: 2rem;
-  color: #fff !important;      /* force white color */
-  cursor: pointer;
-  z-index: 1001;               /* above your nav-bar */
-}
-
-/* mobile: show it */
-@media only screen and (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(28, 28, 30, 0.9);
-    flex-direction: row;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    white-space: nowrap;
-    gap: 2rem;
-  }
-  .nav-links.active {
-    display: flex !important;
-  }
-  .nav-links li {
-    margin: 0;
-  }
-  .nav-links a {
-    padding: 0.5rem 0;
-    font-size: 0.9rem;
-    color: #fff;
-    text-decoration: none;
-  }
-}
-
 /* Hero */
 .hero {
   background: url('hero.jpg') center/cover no-repeat;
@@ -239,3 +196,66 @@ footer p { color: #555; font-size: 0.9rem; }
   height: auto;
   border-radius: 8px;
 }
+
+/*hamburgler*/
+
+/* make sure nav can overflow so we see hamburger */
+.nav-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  overflow: visible !important;
+  z-index: 1000;
+}
+
+/* default: hide hamburger on desktop */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  color: #fff !important;  /* force white */
+  position: absolute;
+  right: 2rem;             /* match your padding */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2000;
+}
+
+/* desktop: always show links in a row */
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  position: static;
+}
+
+/* mobile: show ☰, hide links until toggled */
+@media only screen and (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(28,28,30,0.9);
+    flex-direction: row;     /* keep them in one line */
+    justify-content: center;
+    gap: 2rem;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+  }
+  .nav-links.active {
+    display: flex !important;
+  }
+  .nav-links li {
+    margin: 0;
+  }
+  .nav-links a {
+    color: #fff;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+}
+
