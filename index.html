@@ -8,24 +8,87 @@
 </head>
 <body>
   <header>
-    <nav class="nav-bar">
-      <div class="container">
-        <a href="index.html" class="logo">
-          Adhams Portfolio<span class="cursor"></span>
-        </a>
-        <div class="hamburger">&#9776;</div>
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="software.html">Software</a></li>
-          <li><a href="mechanical.html">Mechanical</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+  <nav class="nav-bar container">
+    <a href="index.html" class="logo">
+      Adhams Portfolio<span class="cursor"></span>
+    </a>
 
-  <!-- Your page content -->
+    <!-- 1. Hard-coded hamburger -->
+    <div class="hamburger">&#9776;</div>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="software.html">Software</a></li>
+      <li><a href="mechanical.html">Mechanical</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+  <section class="hero">
+    <div class="container hero-content">
+      <h1>Welcome to My Portfolio</h1>
+      <p>
+        <span id="typed-text"></span><span class="cursor"></span>
+      </p>
+      <div class="hero-buttons">
+        <a class="btn solid" href="software.html">Explore Software</a>
+        <a class="btn outline" href="mechanical.html">Explore Mechanical</a>
+        <a class="btn outline" href="index.html#posts">Explore Posts</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="posts" class="projects">
+    <div class="container">
+      <h2>Latest Posts</h2>
+      <div class="post-list">
+        <article class="post-card">
+          <h3>General Announcement</h3>
+          <p>This is a general post not tied to any category.</p>
+          <a href="general/post3.html">Read more</a>
+        </article>
+        <article class="post-card">
+          <h3>Software Deep Dive</h3>
+          <p>An in-depth look at my latest software project.</p>
+          <a href="software/post1.html">Read more</a>
+        </article>
+        <article class="post-card">
+          <h3>Mechanical Innovation</h3>
+          <p>Exploring a mechanical design breakthrough.</p>
+          <a href="mechanical/post2.html">Read more</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="projects alt-bg">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>Currently pursuing a Bachelor of Applied Science in Mechanical Engineering at Queen's University, I recently completed an internship with Checkpoint Group, where I honed my competencies in 3D CAD and 2D CAD. My commitment to innovation was reflected in the successful design and layout of ASRS and traditional racking warehouses, often presenting these solutions to clients.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="projects">
+    <div class="container">
+      <h2>Contact</h2>
+      <form class="contact-form"
+            action="https://formspree.io/f/mblgwkwk"
+            method="POST">
+        <input type="text" name="name" placeholder="Your Name" required/>
+        <input type="email" name="email" placeholder="Your Email" required/>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn solid">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Adham Abdelrahim.</p>
+    </div>
+  </footer>
 
   <script defer src="script.js"></script>
 </body>
