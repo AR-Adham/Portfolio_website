@@ -12,27 +12,34 @@ body {
   padding-top: 60px; /* ensure content below fixed navbar */
 }
 
-.container { width: 90%; max-width: 1400px; margin: 0 auto; }
+.container {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
 
+/* Make the nav’s container a flex row */
 .nav-bar .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
+/* Navbar backdrop + fade */
 .nav-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   position: fixed;
   top: 0;
-  width: 100%;
-  padding: 0 40px;
+  left: 0; right: 0;
   background: rgba(28,28,30,0.8);
+  padding: 0 40px;
   z-index: 1000;
-  transition: top 0.3s ease-in-out;
+  transition: top 0.3s ease-in-out; /* restore fade */
 }
 
-.hidden-nav { top: -80px; }
+/* Hidden state (you already have this) */
+.hidden-nav {
+  top: -80px;
+}
 
 .logo {
   font-size: 1rem;
