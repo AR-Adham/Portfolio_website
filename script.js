@@ -59,8 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // 2. Simple toggle only
   const hamburger = document.querySelector('.hamburger');
-  const navLinks  = document.querySelector('.nav-links');
-
+  const navLinks = document.querySelector('.nav-links');
   hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
   });
