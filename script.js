@@ -56,27 +56,10 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // --- Hamburger toggle (mobile only) ---
-  const navLinks = document.querySelector('.nav-links');
-  const navBar = document.querySelector('.nav-bar');
+const hamburger = document.querySelector('.hamburger');
+  const navLinks  = document.querySelector('.nav-links');
 
-  function updateHamburger() {
-    const existing = document.querySelector('.hamburger');
-    if (window.innerWidth <= 768) {
-      if (!existing) {
-        const hamburger = document.createElement('div');
-        hamburger.classList.add('hamburger');
-        hamburger.innerHTML = '&#9776;';
-        navBar.insertBefore(hamburger, navLinks);
-        hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
-      }
-    } else {
-      if (existing) {
-        existing.remove();
-        navLinks.classList.remove('active');
-      }
-    }
-  }
-
-  updateHamburger();
-  window.addEventListener('resize', updateHamburger);
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
 });
