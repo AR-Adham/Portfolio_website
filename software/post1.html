@@ -6,9 +6,9 @@
   <title>Fox and Cayote enclosure simulation - My Portfolio</title>
   <link rel="stylesheet" href="../style.css"/>
   <style>
-    /* PDF slideshow styles */
+    /* === PDF slideshow styles === */
     .pdfshow {
-      --h: 560px;               /* viewer height */
+      --h: 560px;
       --btn-size: 42px;
       position: relative;
       max-width: 960px;
@@ -18,17 +18,9 @@
       background: #000;
       box-shadow: 0 8px 24px rgba(0,0,0,.12);
     }
-    .pdfstage {
-      display: grid; place-items: center;
-      height: var(--h);
-      background: #000;
-      position: relative;
-    }
-    #pdfCanvas {
-      width: 100%; height: 100%;
-      object-fit: contain;
-      background: #000;
-    }
+    .pdfstage { display: grid; place-items: center; height: var(--h); background: #000; }
+    #pdfCanvas { width: 100%; height: 100%; object-fit: contain; background: #000; }
+
     .nav-btn {
       position: absolute; top: 50%; transform: translateY(-50%);
       width: var(--btn-size); height: var(--btn-size);
@@ -91,17 +83,17 @@
         such as fox locations, diffrent terain, diffrent family locations, food locations etc.
       </p>
 
-      <!-- PDF Auto-Slideshow (APSC103.pdf) -->
+      <!-- PDF Auto-Slideshow -->
       <section class="pdfshow" id="pdfShow"
                data-src="../APSC103.pdf"
-               data-interval="3500"   <!-- ms between pages -->
-               data-loop="true"       <!-- loop back to start -->
-               data-autoplay="true">  <!-- start autoplay -->
+               data-interval="3500"
+               data-loop="true"
+               data-autoplay="true">
         <div class="pdfstage">
           <canvas id="pdfCanvas" aria-label="Slide canvas"></canvas>
         </div>
 
-        <!-- Nav buttons -->
+        <!-- Navigation -->
         <button class="nav-btn prev" aria-label="Previous slide">
           <svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
@@ -110,13 +102,13 @@
         </button>
 
         <!-- Controls -->
-        <div class="controls" role="toolbar" aria-label="PDF controls">
+        <div class="controls">
           <button id="togglePlay" aria-pressed="true">⏸ Pause</button>
           <span class="page-indicator"><span id="pageNum">1</span> / <span id="pageCount">—</span></span>
         </div>
       </section>
 
-      <!-- Deck downloads -->
+      <!-- Downloads -->
       <section class="download">
         <h2>Download the Slide Deck</h2>
         <p>
@@ -133,11 +125,12 @@
 
   <script src="../script.js"></script>
 
-  <!-- PDF.js (CDN) -->
+  <!-- === PDF.js === -->
   <script src="https://unpkg.com/pdfjs-dist@4.7.76/build/pdf.min.js"></script>
   <script>
-    // Configure PDF.js worker via CDN as well
-    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://unpkg.com/pdfjs-dist@4.7.76/build/pdf.worker.min.js";
+    // v4 worker file uses .mjs
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://unpkg.com/pdfjs-dist@4.7.76/build/pdf.worker.min.mjs";
 
     (function(){
       const root = document.getElementById('pdfShow');
@@ -154,133 +147,67 @@
       const pageNumEl = document.getElementById('pageNum');
       const pageCountEl = document.getElementById('pageCount');
 
-      let pdfDoc = null;
-      let pageNum = 1;
-      let pageRendering = false;
-      let pageNumPending = null;
-      let autoplay = autoplayDefault;
-      let timer = null;
+      let pdfDoc = null, pageNum = 1, rendering = false, pending = null;
+      let autoplay = autoplayDefault, timer = null;
 
-      function queueRenderPage(num){
-        if(pageRendering){
-          pageNumPending = num;
-        } else {
-          renderPage(num);
-        }
-      }
-
-      function renderPage(num){
-        pageRendering = true;
-        pdfDoc.getPage(num).then(function(page){
-          // Calculate scale to fit container height (—h) while respecting width
+      function render(num){
+        rendering = true;
+        pdfDoc.getPage(num).then(page => {
           const container = root.querySelector('.pdfstage');
-          const desiredWidth = container.clientWidth;
-          const desiredHeight = container.clientHeight;
+          const W = container.clientWidth, H = container.clientHeight;
+          const vp1 = page.getViewport({ scale: 1 });
+          let scale = Math.min(W / vp1.width, H / vp1.height);
+          const vp = page.getViewport({ scale });
 
-          const viewport = page.getViewport({ scale: 1 });
-          // Fit by height first, then clamp to width if needed
-          let scale = desiredHeight / viewport.height;
-          if (viewport.width * scale > desiredWidth) {
-            scale = desiredWidth / viewport.width;
-          }
-          const v = page.getViewport({ scale });
+          canvas.width = vp.width;
+          canvas.height = vp.height;
 
-          canvas.width = v.width;
-          canvas.height = v.height;
-
-          const renderContext = { canvasContext: ctx, viewport: v };
-          const renderTask = page.render(renderContext);
-          renderTask.promise.then(function(){
-            pageRendering = false;
+          page.render({ canvasContext: ctx, viewport: vp }).promise.then(() => {
+            rendering = false;
             pageNumEl.textContent = pageNum;
-            if(pageNumPending !== null){
-              const next = pageNumPending;
-              pageNumPending = null;
-              renderPage(next);
-            }
+            if (pending !== null){ const n = pending; pending = null; render(n); }
           });
         });
       }
+      function queue(num){ rendering ? pending = num : render(num); }
 
-      function nextPage(pause=true){
-        if (pageNum >= pdfDoc.numPages) {
-          if (loop) pageNum = 1;
-          else return;
-        } else {
-          pageNum++;
-        }
-        queueRenderPage(pageNum);
-        if (pause) restartAutoplay();
+      function next(pause=true){
+        pageNum = pageNum >= pdfDoc.numPages ? (loop ? 1 : pdfDoc.numPages) : pageNum + 1;
+        queue(pageNum); if(pause) restart();
+      }
+      function prev(pause=true){
+        pageNum = pageNum <= 1 ? (loop ? pdfDoc.numPages : 1) : pageNum - 1;
+        queue(pageNum); if(pause) restart();
       }
 
-      function prevPage(pause=true){
-        if (pageNum <= 1) {
-          if (loop) pageNum = pdfDoc.numPages;
-          else return;
-        } else {
-          pageNum--;
-        }
-        queueRenderPage(pageNum);
-        if (pause) restartAutoplay();
-      }
+      function start(){ if(!autoplay) return; stop(); timer=setInterval(()=>next(false), intervalMs); btnToggle.textContent='⏸ Pause'; }
+      function stop(){ if(timer){ clearInterval(timer); timer=null; } btnToggle.textContent='▶️ Play'; }
+      function restart(){ stop(); start(); }
 
-      function startAutoplay(){
-        if (!autoplay) return;
-        stopAutoplay();
-        timer = setInterval(() => nextPage(false), intervalMs);
-        btnToggle.textContent = '⏸ Pause';
-        btnToggle.setAttribute('aria-pressed', 'true');
-      }
-      function stopAutoplay(){
-        if (timer) clearInterval(timer);
-        timer = null;
-        btnToggle.textContent = '▶️ Play';
-        btnToggle.setAttribute('aria-pressed', 'false');
-      }
-      function restartAutoplay(){ stopAutoplay(); startAutoplay(); }
+      btnNext.addEventListener('click', ()=>next(true));
+      btnPrev.addEventListener('click', ()=>prev(true));
+      btnToggle.addEventListener('click', ()=>{ autoplay=!autoplay; autoplay?start():stop(); });
 
-      // Events
-      btnNext.addEventListener('click', () => nextPage(true));
-      btnPrev.addEventListener('click', () => prevPage(true));
-
-      btnToggle.addEventListener('click', () => {
-        autoplay = !autoplay;
-        if (autoplay) startAutoplay(); else stopAutoplay();
+      root.tabIndex=0;
+      root.addEventListener('keydown', e=>{
+        if(e.key==='ArrowRight') next(true);
+        if(e.key==='ArrowLeft') prev(true);
+        if(e.key===' '){ e.preventDefault(); btnToggle.click(); }
       });
 
-      // Keyboard navigation
-      root.tabIndex = 0;
-      root.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') nextPage(true);
-        if (e.key === 'ArrowLeft')  prevPage(true);
-        if (e.key.toLowerCase() === ' ') {
-          e.preventDefault();
-          btnToggle.click();
-        }
-      });
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', start);
 
-      // Pause on hover/focus (optional)
-      root.addEventListener('mouseenter', stopAutoplay);
-      root.addEventListener('mouseleave', startAutoplay);
-      root.addEventListener('focusin', stopAutoplay);
-      root.addEventListener('focusout', startAutoplay);
-
-      // Load the PDF
-      pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf){
-        pdfDoc = pdf;
-        pageCountEl.textContent = pdfDoc.numPages;
-        renderPage(pageNum);
-        startAutoplay();
-      }).catch(err => {
-        console.error('PDF load error:', err);
-        // Fallback simple embed if PDF.js fails
-        const fallback = document.createElement('iframe');
-        fallback.src = pdfUrl;
-        fallback.style.border = 'none';
-        fallback.width = '100%';
-        fallback.height = getComputedStyle(root).getPropertyValue('--h') || '560px';
-        root.innerHTML = '';
-        root.appendChild(fallback);
+      pdfjsLib.getDocument(pdfUrl).promise.then(pdf=>{
+        pdfDoc=pdf;
+        pageCountEl.textContent=pdfDoc.numPages;
+        render(pageNum);
+        start();
+      }).catch(err=>{
+        console.error("PDF load error:",err);
+        const iframe=document.createElement('iframe');
+        iframe.src=pdfUrl; iframe.width="100%"; iframe.height="560"; iframe.style.border="none";
+        root.innerHTML=""; root.appendChild(iframe);
       });
     })();
   </script>
