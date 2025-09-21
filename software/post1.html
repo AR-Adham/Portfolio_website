@@ -52,7 +52,23 @@
       .nav-btn { display: none; }
     }
 
-    /* tiny inline error banner */
+    /* video section */
+    .video-demo {
+      max-width: 960px;
+      margin: 1.5rem auto;
+      text-align: center;
+    }
+    .video-demo video {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,.18);
+    }
+    .video-demo p {
+      margin-top: .6rem;
+      font: 500 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: #444;
+    }
+
     .error-banner{
       position:absolute; inset:auto 0 0 0; background:#b00020; color:#fff;
       padding:.6rem .9rem; font: 500 14px/1.3 system-ui; text-align:center;
@@ -83,6 +99,16 @@
         The simulation was applied to the Sandy Pines Wildlife Centre, where it supported analysis of trap placement and enclosure mapping strategies. 
         This project enhanced my skills in object-oriented programming, data structures, and user interface design, 
         while demonstrating how computational modeling can contribute to ecological management and informed decision-making.</p>
+      
+      <!-- Video demo -->
+      <section class="video-demo">
+        <video controls poster="../hero.jpg">
+          <source src="../apsc103demo.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p>Demonstration of the APSC 103 fox & coyote simulation in action.</p>
+      </section>
+
       <p>My main role on the project was developing the brain of the Cannids, aswell as developing the architechture in which the simulation ran. 
         The brain was a engine which based on the frequency since foxes or cayotes had last done something would pick its next decision, the wheights of how 
         frequently foxes decided what to do came from academic research. The architechture of the simulation was a 3d array which tracked diffrent information for each layer
@@ -134,7 +160,6 @@
   <!-- === PDF.js v3 (stable classic worker) === -->
   <script src="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
   <script>
-    // Classic worker file (.js) for v3
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       "https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 
@@ -157,7 +182,6 @@
       let autoplay = autoplayDefault, timer = null;
 
       function fitViewport(page){
-        // Fit PDF page into the stage while preserving aspect ratio
         const container = root.querySelector('.pdfstage');
         const W = container.clientWidth, H = container.clientHeight;
         const vp1 = page.getViewport({ scale: 1 });
@@ -176,7 +200,7 @@
             pageNumEl.textContent = pageNum;
             if (pending !== null){ const n = pending; pending = null; render(n); }
           });
-        }).catch(showError);
+        }).catch(err=>console.error(err));
       }
       function queue(num){ rendering ? pending = num : render(num); }
 
@@ -191,53 +215,36 @@
         queue(pageNum); if(pause) restart();
       }
 
-      function start(){ if(!autoplay) return; stop(); timer=setInterval(()=>next(false), intervalMs); btnToggle.textContent='⏸ Pause'; btnToggle.setAttribute('aria-pressed','true'); }
-      function stop(){ if(timer){ clearInterval(timer); timer=null; } btnToggle.textContent='▶️ Play'; btnToggle.setAttribute('aria-pressed','false'); }
+      function start(){ if(!autoplay) return; stop(); timer=setInterval(()=>next(false), intervalMs); btnToggle.textContent='⏸ Pause'; }
+      function stop(){ if(timer){ clearInterval(timer); timer=null; } btnToggle.textContent='▶️ Play'; }
       function restart(){ stop(); start(); }
 
       btnNext.addEventListener('click', ()=>next(true));
       btnPrev.addEventListener('click', ()=>prev(true));
       btnToggle.addEventListener('click', ()=>{ autoplay=!autoplay; autoplay?start():stop(); });
 
-      // Keyboard
       root.tabIndex = 0;
-      root.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') next(true);
-        if (e.key === 'ArrowLeft')  prev(true);
-        if (e.key === ' ') { e.preventDefault(); btnToggle.click(); }
+      root.addEventListener('keydown', e=>{
+        if(e.key==='ArrowRight') next(true);
+        if(e.key==='ArrowLeft') prev(true);
+        if(e.key===' '){ e.preventDefault(); btnToggle.click(); }
       });
 
-      // Pause on hover/focus (optional)
       root.addEventListener('mouseenter', stop);
       root.addEventListener('mouseleave', start);
-      root.addEventListener('focusin', stop);
-      root.addEventListener('focusout', start);
 
-      function showError(err){
-        console.error('PDF viewer error:', err);
-        const msg = document.createElement('div');
-        msg.className = 'error-banner';
-        msg.textContent = 'Could not load APSC103.pdf — falling back to simple viewer.';
-        root.appendChild(msg);
-        // Fallback: native PDF viewer
-        const fallback = document.createElement('iframe');
-        fallback.src = pdfUrl;
-        fallback.style.border = 'none';
-        fallback.width = '100%';
-        fallback.height = getComputedStyle(root).getPropertyValue('--h') || '560px';
-        root.innerHTML = '';
-        root.appendChild(fallback);
-      }
-
-      // Load the PDF and start
-      pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
-        pdfDoc = pdf;
-        pageCountEl.textContent = pdfDoc.numPages;
+      pdfjsLib.getDocument(pdfUrl).promise.then(pdf=>{
+        pdfDoc=pdf;
+        pageCountEl.textContent=pdfDoc.numPages;
         render(pageNum);
         start();
-        // Re-render on resize to keep it crisp
-        window.addEventListener('resize', () => queue(pageNum));
-      }).catch(showError);
+        window.addEventListener('resize', ()=>queue(pageNum));
+      }).catch(err=>{
+        console.error("PDF load error:",err);
+        const iframe=document.createElement('iframe');
+        iframe.src=pdfUrl; iframe.width="100%"; iframe.height="560"; iframe.style.border="none";
+        root.innerHTML=""; root.appendChild(iframe);
+      });
     })();
   </script>
 </body>
