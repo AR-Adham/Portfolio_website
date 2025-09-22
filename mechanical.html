@@ -6,11 +6,10 @@
   <title>Adhams Portfolio</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    /* Add this to style.css ideally */
     .post-list {
       display: grid;
       grid-template-columns: repeat(3, 1fr); /* 3 per row */
-      gap: 20px; /* spacing between cards */
+      gap: 20px;
       margin-top: 2rem;
     }
 
@@ -19,10 +18,19 @@
       padding: 1rem;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+
+    .post-card img {
+      max-width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 0.8rem;
     }
 
     .post-card h3 {
-      margin-top: 0;
+      margin: 0.5rem 0;
     }
 
     .post-card a {
@@ -58,21 +66,25 @@
     <h2>Mechanical Posts</h2>
     <div class="post-list">
       <article class="post-card">
+        <img src="hero.png" alt="Car Project Thumbnail"/>
         <h3>Car Project</h3>
         <p>Exploring a mechanical design breakthrough.</p>
         <a href="mechanical/post2.html">Read more</a>
       </article>
       <article class="post-card">
+        <img src="hero.png" alt="Bishop FRC5409 Thumbnail"/>
         <h3>Bishop FRC5409</h3>
         <p>Exploring a mechanical design breakthrough.</p>
         <a href="mechanical/Bishop.html">Read more</a>
       </article>
       <article class="post-card">
+        <img src="hero.png" alt="Dunkirk FRC5409 Thumbnail"/>
         <h3>Dunkirk FRC5409</h3>
         <p>Exploring a mechanical design breakthrough.</p>
         <a href="mechanical/Dunkirk.html">Read more</a>
       </article>
       <article class="post-card">
+        <img src="hero.png" alt="Drone Project Thumbnail"/>
         <h3>Drone Project</h3>
         <p>Exploring a mechanical design breakthrough.</p>
         <a href="mechanical/Drone.html">Read more</a>
@@ -89,4 +101,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
