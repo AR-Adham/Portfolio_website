@@ -27,7 +27,7 @@
       <!-- Starting paragraph -->
       <p>This project is my final project from my grade 12 year, It is a fully designed custom car (excluding electronics and interior). This was designed in CAD using both inventor and solidworks. My primary role was designing the engine, transmission and exhaust. This procces went from initial idea sketches, to calculations on excel, to rapid prototyping and FEA testing on CAD all the way to final modelling and adjustment on our cad model.</p>
 
-      <!-- Slideshow -->
+      <!-- Slideshow (no dots, no drag) -->
       <section class="slideshow" data-autoplay="true" data-interval="3200" aria-roledescription="carousel">
         <div class="slides" role="group" aria-live="polite">
 
@@ -91,12 +91,13 @@
         <button class="nav-btn next" aria-label="Next slide">
           <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-
-        <div class="dots" role="tablist" aria-label="Slide dots"></div>
       </section>
 
       <!-- Styles -->
       <style>
+        /* Avoid layout-induced drift: lock widths and remove gaps */
+        *, *::before, *::after { box-sizing: border-box; }
+
         .slideshow {
           --h: 520px;
           --btn-size: 42px;
@@ -108,14 +109,31 @@
           max-width: 1000px;
           margin: 1.75rem auto;
         }
-        .slides { display: flex; transition: transform .5s ease; height: var(--h); }
-        .slide { flex: 0 0 100%; height: var(--h); position: relative; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; display:block; }
+        .slides {
+          display: flex;
+          height: var(--h);
+          width: 100%;
+          transition: transform .5s ease;
+          will-change: transform;
+        }
+        .slide {
+          min-width: 100%;   /* exact page width */
+          height: var(--h);
+          position: relative;
+          margin: 0;         /* no margins that can cause drift */
+          padding: 0;
+        }
+        .slide img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
 
         .caption {
           position: absolute; inset: auto 0 0 0;
           background: linear-gradient(transparent, rgba(0,0,0,.75) 40%, rgba(0,0,0,.9));
-          color: #fff; padding: .9rem 1rem 2.2rem 1rem; /* extra bottom padding so text sits above dots */
+          color: #fff; padding: .9rem 1rem 1.2rem 1rem;
           text-align: center;
         }
         .caption .subtitle { margin: 0 0 .35rem; font: 700 16px/1.3 system-ui, sans-serif; }
@@ -133,79 +151,66 @@
         .next { right: .5rem; }
         .nav-btn svg { width: 22px; height: 22px; }
 
-        .dots {
-          position: absolute;
-          left: 50%; transform: translateX(-50%);
-          bottom: .5rem;               /* LOWERED */
-          display: flex; gap: .4rem;
-          padding: .35rem .5rem;
-          border-radius: 999px;
-          background: rgba(0,0,0,.35);
-          z-index: 3;
-        }
-        .dot {
-          width: 10px; height: 10px; border-radius: 50%;
-          background: rgba(255,255,255,.6); border: none; cursor: pointer;
-        }
-        .dot[aria-current="true"] { background: #fff; }
-
         @media (max-width: 640px) {
           .slideshow { --h: 380px; }
           .nav-btn { display: none; }
         }
       </style>
 
-      <!-- Script -->
+      <!-- Script (no dots, no drag; exact 100% steps to prevent drift) -->
       <script>
         (function(){
-          const slideshow = document.currentScript.previousElementSibling.previousElementSibling; 
+          const slideshow = document.currentScript.previousElementSibling.previousElementSibling;
           const track = slideshow.querySelector('.slides');
           const slides = Array.from(slideshow.querySelectorAll('.slide'));
           const btnPrev = slideshow.querySelector('.prev');
           const btnNext = slideshow.querySelector('.next');
 
-          const dotsWrap = slideshow.querySelector('.dots');
           let index = 0;
-          let autoplay = slideshow.getAttribute('data-autoplay') === 'true';
+          const autoplay = slideshow.getAttribute('data-autoplay') === 'true';
           const interval = parseInt(slideshow.getAttribute('data-interval') || '3500', 10);
           let timer = null;
 
-          slides.forEach((_, i) => {
-            const b = document.createElement('button');
-            b.className = 'dot';
-            b.setAttribute('role','tab');
-            b.setAttribute('aria-label', `Go to slide ${i+1}`);
-            b.addEventListener('click', () => goTo(i, true));
-            dotsWrap.appendChild(b);
-          });
-
           function update() {
-            track.style.transform = `translateX(${-index * 100}%)`;
-            dotsWrap.querySelectorAll('.dot').forEach((d, i) => {
-              d.setAttribute('aria-current', i === index ? 'true' : 'false');
-            });
+            const x = -index * 100; // whole-number percentage avoids cumulative rounding
+            track.style.transform = `translate3d(${x}%, 0, 0)`;
           }
-          function goTo(i, pause=false) { index = (i + slides.length) % slides.length; update(); if(pause) restart(); }
-          function next(pause=false){ goTo(index + 1, pause); }
-          function prev(pause=false){ goTo(index - 1, pause); }
+          function goTo(i, restart=true) {
+            index = (i + slides.length) % slides.length;
+            update();
+            if (restart) restartAutoplay();
+          }
+          function next(restart=true){ goTo(index + 1, restart); }
+          function prev(restart=true){ goTo(index - 1, restart); }
 
           btnNext.addEventListener('click', () => next(true));
           btnPrev.addEventListener('click', () => prev(true));
 
+          // Keyboard support
           slideshow.tabIndex = 0;
           slideshow.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') next(true);
             if (e.key === 'ArrowLeft')  prev(true);
           });
 
-          function start(){ if(!autoplay) return; stop(); timer = setInterval(() => next(false), interval); }
-          function stop(){ if(timer){ clearInterval(timer); timer=null; } }
-          function restart(){ stop(); start(); }
+          function startAutoplay(){
+            if (!autoplay) return;
+            stopAutoplay();
+            timer = setInterval(() => next(false), interval);
+          }
+          function stopAutoplay(){ if (timer) { clearInterval(timer); timer = null; } }
+          function restartAutoplay(){ stopAutoplay(); startAutoplay(); }
 
-          slideshow.addEventListener('mouseenter', stop);
-          slideshow.addEventListener('mouseleave', start);
+          // Optional: pause on hover
+          slideshow.addEventListener('mouseenter', stopAutoplay);
+          slideshow.addEventListener('mouseleave', startAutoplay);
 
-          update(); start();
+          // Initialize
+          update();
+          startAutoplay();
+
+          // Re-align on resize (keeps things tight if viewport changes)
+          window.addEventListener('resize', update);
         })();
       </script>
     </article>
