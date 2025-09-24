@@ -24,77 +24,61 @@
       <div class="post-image"><img src="../hero.jpg" alt="Post Image"/></div>
       <h1>Mechanical Innovation</h1>
 
-      <!-- Starting paragraph (as provided) -->
+      <!-- Starting paragraph -->
       <p>This project is my final project from my grade 12 year, It is a fully designed custom car (excluding electronics and interior). This was designed in CAD using both inventor and solidworks. My primary role was designing the engine, transmission and exhaust. This procces went from initial idea sketches, to calculations on excel, to rapid prototyping and FEA testing on CAD all the way to final modelling and adjustment on our cad model.</p>
 
-      <!-- Image Slideshow with subtitles + full paragraph captions.
-           First (1), middle (3), and last (5) slides have downloadable links. -->
+      <!-- Slideshow -->
       <section class="slideshow" data-autoplay="true" data-interval="3200" aria-roledescription="carousel">
         <div class="slides" role="group" aria-live="polite">
 
           <!-- 1: FIRST (downloadable) -->
           <figure class="slide">
-            <a href="../images/mech_01_full.jpg" download title="Download high-res: mech_01_full.jpg">
+            <a href="../images/mech_01_full.jpg" download>
               <img src="../images/mech_01.jpg" alt="Concept evolution sketches"/>
             </a>
             <figcaption class="caption">
               <h3 class="subtitle">Concept & Proportions</h3>
-              <p class="desc">
-                From the earliest pen-on-paper sketches, I explored wheelbase, overhangs, and package constraints to balance stance and aerodynamics.
-                These sketches established hard points that later drove CAD surfaces and the engine bay envelope.
-              </p>
+              <p class="desc">From the earliest pen-on-paper sketches, I explored wheelbase, overhangs, and package constraints to balance stance and aerodynamics. These sketches established hard points that later drove CAD surfaces and the engine bay envelope.</p>
             </figcaption>
           </figure>
 
           <!-- 2 -->
           <figure class="slide">
-            <img src="../images/mech_02.jpg" alt="Spreadsheet with drivetrain and gear ratio calculations"/>
+            <img src="../images/mech_02.jpg" alt="Excel drivetrain calculations"/>
             <figcaption class="caption">
               <h3 class="subtitle">Excel Calculations</h3>
-              <p class="desc">
-                I translated the targets into gearing, tractive effort, and top-speed estimates in Excel. Sensitivity analyses guided final ratio choices,
-                ensuring launch performance without sacrificing cruising RPM and efficiency.
-              </p>
+              <p class="desc">I translated the targets into gearing, tractive effort, and top-speed estimates in Excel. Sensitivity analyses guided final ratio choices, ensuring launch performance without sacrificing cruising RPM and efficiency.</p>
             </figcaption>
           </figure>
 
           <!-- 3: MIDDLE (downloadable) -->
           <figure class="slide">
-            <a href="../images/mech_03_full.jpg" download title="Download high-res: mech_03_full.jpg">
-              <img src="../images/mech_03.jpg" alt="Inventor assembly of engine and transmission"/>
+            <a href="../images/mech_03_full.jpg" download>
+              <img src="../images/mech_03.jpg" alt="Inventor engine and transmission assembly"/>
             </a>
             <figcaption class="caption">
               <h3 class="subtitle">Engine + Transmission CAD</h3>
-              <p class="desc">
-                In Inventor/SolidWorks I modeled the engine block interfaces, bellhousing pattern, and transmission geometry. Primary focus areas included
-                shaft alignment, clutch clearance, and serviceability spacing for mounts and exhaust routing.
-              </p>
+              <p class="desc">In Inventor/SolidWorks I modeled the engine block interfaces, bellhousing pattern, and transmission geometry. Primary focus areas included shaft alignment, clutch clearance, and serviceability spacing for mounts and exhaust routing.</p>
             </figcaption>
           </figure>
 
           <!-- 4 -->
           <figure class="slide">
-            <img src="../images/mech_04.jpg" alt="SolidWorks FEA results with stress distribution on bracket"/>
+            <img src="../images/mech_04.jpg" alt="SolidWorks FEA results"/>
             <figcaption class="caption">
               <h3 class="subtitle">FEA & Rapid Prototyping</h3>
-              <p class="desc">
-                Critical brackets (exhaust hangers, mounts) were iterated with FEA to meet stiffness and factor-of-safety targets under worst-case loads.
-                Prototypes were quickly printed/CNC’d to validate fit and refine the final geometry.
-              </p>
+              <p class="desc">Critical brackets (exhaust hangers, mounts) were iterated with FEA to meet stiffness and factor-of-safety targets under worst-case loads. Prototypes were quickly printed/CNC’d to validate fit and refine the final geometry.</p>
             </figcaption>
           </figure>
 
           <!-- 5: LAST (downloadable) -->
           <figure class="slide">
-            <a href="../images/mech_05_full.jpg" download title="Download high-res: mech_05_full.jpg">
-              <img src="../images/mech_05.jpg" alt="Final CAD with exploded components"/>
+            <a href="../images/mech_05_full.jpg" download>
+              <img src="../images/mech_05.jpg" alt="Final CAD assembly"/>
             </a>
             <figcaption class="caption">
               <h3 class="subtitle">Final Assembly</h3>
-              <p class="desc">
-                The final model integrates powertrain, exhaust, and structure with clear service paths and tunable components. This stage consolidated
-                all prior decisions into a cohesive, manufacturable package ready for further detailing.
-              </p>
+              <p class="desc">The final model integrates powertrain, exhaust, and structure with clear service paths and tunable components. This stage consolidated all prior decisions into a cohesive, manufacturable package ready for further detailing.</p>
             </figcaption>
           </figure>
 
@@ -111,10 +95,10 @@
         <div class="dots" role="tablist" aria-label="Slide dots"></div>
       </section>
 
-      <!-- Slideshow styles (kept here to preserve the exact <head> you requested) -->
+      <!-- Styles -->
       <style>
         .slideshow {
-          --h: 520px;           /* Overall slide height */
+          --h: 520px;
           --btn-size: 42px;
           position: relative;
           overflow: hidden;
@@ -124,29 +108,18 @@
           max-width: 1000px;
           margin: 1.75rem auto;
         }
-        .slides { display: flex; transition: transform .5s ease; will-change: transform; height: var(--h); }
-        .slide { flex: 0 0 100%; height: var(--h); position: relative; color: #fff; }
+        .slides { display: flex; transition: transform .5s ease; height: var(--h); }
+        .slide { flex: 0 0 100%; height: var(--h); position: relative; }
         .slide img { width: 100%; height: 100%; object-fit: cover; display:block; }
 
-        /* Caption now supports subtitle + full paragraph under each slide */
         .caption {
           position: absolute; inset: auto 0 0 0;
           background: linear-gradient(transparent, rgba(0,0,0,.75) 40%, rgba(0,0,0,.9));
-          color: #fff; padding: .85rem 1rem 1rem 1rem;
-          max-height: 48%;          /* allow room for longer paragraphs */
-          overflow-y: auto;         /* scroll if text is very long */
-          backdrop-filter: blur(2px);
+          color: #fff; padding: .9rem 1rem 2.2rem 1rem; /* extra bottom padding so text sits above dots */
+          text-align: center;
         }
-        .caption .subtitle {
-          margin: 0 0 .35rem 0;
-          font: 700 16px/1.25 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-          letter-spacing: .2px;
-        }
-        .caption .desc {
-          margin: 0;
-          font: 400 14px/1.45 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-          color: #f1f1f1;
-        }
+        .caption .subtitle { margin: 0 0 .35rem; font: 700 16px/1.3 system-ui, sans-serif; }
+        .caption .desc { margin: 0 auto; font: 400 14px/1.5 system-ui, sans-serif; max-width: 800px; }
 
         .nav-btn {
           position: absolute; top: 50%; transform: translateY(-50%);
@@ -154,48 +127,44 @@
           border-radius: 999px; border: none; cursor: pointer;
           background: rgba(255,255,255,.85);
           display: grid; place-items: center;
-          transition: background .2s ease, transform .2s ease;
         }
-        .nav-btn:hover { background: #fff; transform: translateY(-50%) scale(1.05); }
+        .nav-btn:hover { background: #fff; }
         .prev { left: .5rem; }
         .next { right: .5rem; }
         .nav-btn svg { width: 22px; height: 22px; }
 
         .dots {
-          position: absolute; left: 50%; transform: translateX(-50%);
-          bottom: .5rem; display: flex; gap: .4rem;
-          padding: .35rem .5rem; border-radius: 999px;
-          background: rgba(0,0,0,.3);
+          position: absolute;
+          left: 50%; transform: translateX(-50%);
+          bottom: .5rem;               /* LOWERED */
+          display: flex; gap: .4rem;
+          padding: .35rem .5rem;
+          border-radius: 999px;
+          background: rgba(0,0,0,.35);
+          z-index: 3;
         }
         .dot {
-          width: 10px; height: 10px; border-radius: 999px;
+          width: 10px; height: 10px; border-radius: 50%;
           background: rgba(255,255,255,.6); border: none; cursor: pointer;
         }
         .dot[aria-current="true"] { background: #fff; }
 
         @media (max-width: 640px) {
           .slideshow { --h: 380px; }
-          .caption { max-height: 55%; padding: .75rem .9rem; }
-          .nav-btn { display: none; } /* optional on small screens */
+          .nav-btn { display: none; }
         }
       </style>
 
-      <!-- Slideshow script (self-contained) -->
+      <!-- Script -->
       <script>
         (function(){
-          const slideshow = document.currentScript.previousElementSibling.previousElementSibling; // the .slideshow section
+          const slideshow = document.currentScript.previousElementSibling.previousElementSibling; 
           const track = slideshow.querySelector('.slides');
           const slides = Array.from(slideshow.querySelectorAll('.slide'));
           const btnPrev = slideshow.querySelector('.prev');
           const btnNext = slideshow.querySelector('.next');
 
-          // Build dots dynamically
-          const dotsWrap = document.createElement('div');
-          dotsWrap.className = 'dots';
-          dotsWrap.setAttribute('role','tablist');
-          dotsWrap.setAttribute('aria-label','Slide dots');
-          slideshow.appendChild(dotsWrap);
-
+          const dotsWrap = slideshow.querySelector('.dots');
           let index = 0;
           let autoplay = slideshow.getAttribute('data-autoplay') === 'true';
           const interval = parseInt(slideshow.getAttribute('data-interval') || '3500', 10);
@@ -216,64 +185,26 @@
               d.setAttribute('aria-current', i === index ? 'true' : 'false');
             });
           }
-
-          function goTo(i, pause=false) {
-            index = (i + slides.length) % slides.length;
-            update();
-            if (pause) restart();
-          }
-
+          function goTo(i, pause=false) { index = (i + slides.length) % slides.length; update(); if(pause) restart(); }
           function next(pause=false){ goTo(index + 1, pause); }
           function prev(pause=false){ goTo(index - 1, pause); }
 
           btnNext.addEventListener('click', () => next(true));
           btnPrev.addEventListener('click', () => prev(true));
 
-          // Keyboard
           slideshow.tabIndex = 0;
           slideshow.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') next(true);
             if (e.key === 'ArrowLeft')  prev(true);
           });
 
-          // Touch/drag
-          let startX = 0, dx = 0, dragging = false, pointerId = null;
-          track.addEventListener('pointerdown', e => {
-            dragging = true; startX = e.clientX; dx = 0; pointerId = e.pointerId;
-            track.setPointerCapture(pointerId);
-            stop();
-          });
-          track.addEventListener('pointermove', e => {
-            if(!dragging) return;
-            dx = e.clientX - startX;
-            track.style.transition = 'none';
-            track.style.transform = `translateX(calc(${-index*100}% + ${dx}px))`;
-          });
-          function endDrag(commit=true) {
-            if(!dragging) return;
-            track.style.transition = '';
-            if (commit && Math.abs(dx) > 50) (dx < 0 ? next(true) : prev(true));
-            else update();
-            dragging = false; dx = 0;
-            restart();
-            if (pointerId !== null) { try { track.releasePointerCapture(pointerId); } catch(e){} pointerId = null; }
-          }
-          track.addEventListener('pointerup',   () => endDrag(true));
-          track.addEventListener('pointercancel', () => endDrag(false));
-          track.addEventListener('pointerleave',  () => endDrag(false));
-
-          // Autoplay
           function start(){ if(!autoplay) return; stop(); timer = setInterval(() => next(false), interval); }
           function stop(){ if(timer){ clearInterval(timer); timer=null; } }
           function restart(){ stop(); start(); }
 
-          // Pause on hover/focus
           slideshow.addEventListener('mouseenter', stop);
           slideshow.addEventListener('mouseleave', start);
-          slideshow.addEventListener('focusin', stop);
-          slideshow.addEventListener('focusout', start);
 
-          // Init
           update(); start();
         })();
       </script>
