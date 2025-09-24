@@ -24,69 +24,45 @@
       <div class="post-image"><img src="../hero.jpg" alt="Post Image"/></div>
       <h1>Mechanical Innovation</h1>
 
-      <!-- Intro image -->
-      <figure class="intro-fig">
-        <img src="../images/mech_intro.jpg" alt="Custom car concept render front three-quarter"/>
-        <figcaption>Custom car concept — final exterior render.</figcaption>
-      </figure>
-
       <!-- Starting paragraph (as provided) -->
       <p>This project is my final project from my grade 12 year, It is a fully designed custom car (excluding electronics and interior). This was designed in CAD using both inventor and solidworks. My primary role was designing the engine, transmission and exhaust. This procces went from initial idea sketches, to calculations on excel, to rapid prototyping and FEA testing on CAD all the way to final modelling and adjustment on our cad model.</p>
 
-      <!-- Five images with captions (1st and 5th are downloadable links) -->
-      <section class="image-grid">
-        <!-- 1 -->
-        <figure>
-          <a href="../images/mech_01_full.jpg" download title="Download high-res: mech_01_full.jpg">
-            <img src="../images/mech_01.jpg" alt="Hand sketches of vehicle proportions and packaging"/>
-          </a>
-          <figcaption>Initial proportion & packaging sketches (downloadable).</figcaption>
-        </figure>
-        <!-- 2 -->
-        <figure>
-          <img src="../images/mech_02.jpg" alt="Excel screenshot showing drivetrain and gear ratio calculations"/>
-          <figcaption>Excel-based drivetrain sizing & gear ratio study.</figcaption>
-        </figure>
-        <!-- 3 -->
-        <figure>
-          <img src="../images/mech_03.jpg" alt="Inventor assembly of engine block and transmission housing"/>
-          <figcaption>Inventor assembly — engine block & transmission housing.</figcaption>
-        </figure>
-        <!-- 4 -->
-        <figure>
-          <img src="../images/mech_04.jpg" alt="SolidWorks FEA of exhaust bracket with stress contours"/>
-          <figcaption>SolidWorks FEA — exhaust bracket stress & deflection.</figcaption>
-        </figure>
-        <!-- 5 -->
-        <figure>
-          <a href="../images/mech_05_full.jpg" download title="Download high-res: mech_05_full.jpg">
-            <img src="../images/mech_05.jpg" alt="Final CAD model of the car with exploded components"/>
-          </a>
-          <figcaption>Final CAD model & exploded view (downloadable).</figcaption>
-        </figure>
-      </section>
-
-      <!-- Slideshow section -->
+      <!-- Image Slideshow (first, middle, last slides are downloadable) -->
       <section class="slideshow" data-autoplay="true" data-interval="3200" aria-roledescription="carousel">
         <div class="slides" role="group" aria-live="polite">
+          <!-- 1: FIRST (downloadable) -->
           <figure class="slide">
-            <img src="../images/mech_01.jpg" alt="Sketchboard of concept evolution"/>
-            <figcaption class="caption">Concept evolution: sketches → proportions.</figcaption>
+            <a href="../images/mech_01_full.jpg" download title="Download high-res: mech_01_full.jpg">
+              <img src="../images/mech_01.jpg" alt="Concept evolution sketches"/>
+            </a>
+            <figcaption class="caption">Concept evolution: initial sketches.</figcaption>
           </figure>
+
+          <!-- 2 -->
           <figure class="slide">
-            <img src="../images/mech_02.jpg" alt="Spreadsheet with drivetrain calculations"/>
-            <figcaption class="caption">Drivetrain sizing & ratios in Excel.</figcaption>
+            <img src="../images/mech_02.jpg" alt="Spreadsheet with drivetrain and gear ratio calculations"/>
+            <figcaption class="caption">Drivetrain sizing & ratio study (Excel).</figcaption>
           </figure>
+
+          <!-- 3: MIDDLE (downloadable) -->
           <figure class="slide">
-            <img src="../images/mech_03.jpg" alt="Inventor assembly of engine and transmission"/>
+            <a href="../images/mech_03_full.jpg" download title="Download high-res: mech_03_full.jpg">
+              <img src="../images/mech_03.jpg" alt="Inventor assembly of engine and transmission"/>
+            </a>
             <figcaption class="caption">Engine + transmission assembly (Inventor).</figcaption>
           </figure>
+
+          <!-- 4 -->
           <figure class="slide">
-            <img src="../images/mech_04.jpg" alt="FEA results showing stress distribution on bracket"/>
-            <figcaption class="caption">FEA stress distribution on bracket.</figcaption>
+            <img src="../images/mech_04.jpg" alt="SolidWorks FEA results with stress distribution on bracket"/>
+            <figcaption class="caption">FEA stress distribution (SolidWorks).</figcaption>
           </figure>
+
+          <!-- 5: LAST (downloadable) -->
           <figure class="slide">
-            <img src="../images/mech_05.jpg" alt="Final CAD with exploded components"/>
+            <a href="../images/mech_05_full.jpg" download title="Download high-res: mech_05_full.jpg">
+              <img src="../images/mech_05.jpg" alt="Final CAD with exploded components"/>
+            </a>
             <figcaption class="caption">Final CAD & exploded components.</figcaption>
           </figure>
         </div>
@@ -102,39 +78,8 @@
         <div class="dots" role="tablist" aria-label="Slide dots"></div>
       </section>
 
-      <!-- Slideshow styles (kept outside <head> to preserve the exact header) -->
+      <!-- Slideshow styles (kept here to preserve the exact <head> you requested) -->
       <style>
-        .intro-fig { max-width: 1000px; margin: 1rem auto; }
-        .intro-fig img { width: 100%; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,.12); }
-        .intro-fig figcaption { text-align: center; margin-top: .5rem; color: #555; font: 500 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
-
-        .image-grid {
-          display: grid;
-          grid-template-columns: repeat(5, 1fr);
-          gap: 12px;
-          margin: 1.25rem auto;
-          max-width: 1000px;
-        }
-        .image-grid figure { margin: 0; }
-        .image-grid img {
-          width: 100%; height: 100%;
-          object-fit: cover;
-          aspect-ratio: 4/3;
-          border-radius: 10px;
-          box-shadow: 0 4px 14px rgba(0,0,0,.10);
-          display: block;
-        }
-        .image-grid figcaption {
-          text-align: center; margin-top: .5rem; color: #555;
-          font: 500 13px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-        }
-        @media (max-width: 980px) {
-          .image-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        @media (max-width: 640px) {
-          .image-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
         .slideshow {
           --h: 460px;
           --btn-size: 42px;
@@ -192,6 +137,8 @@
           const slides = Array.from(slideshow.querySelectorAll('.slide'));
           const btnPrev = slideshow.querySelector('.prev');
           const btnNext = slideshow.querySelector('.next');
+
+          // Build dots dynamically
           const dotsWrap = document.createElement('div');
           dotsWrap.className = 'dots';
           dotsWrap.setAttribute('role','tablist');
@@ -203,7 +150,6 @@
           const interval = parseInt(slideshow.getAttribute('data-interval') || '3500', 10);
           let timer = null;
 
-          // Build dots
           slides.forEach((_, i) => {
             const b = document.createElement('button');
             b.className = 'dot';
