@@ -97,6 +97,172 @@
       <p>This is my drone project from grade 11 tech design. It was my first large solo project so it came with a large learning curve on alot of diffrent aspects; soft skills like setting my own project scope, requirements and timeline to technichals like understanding electronics layouts and managing weight/size. The project was made using Inventor and was designed to be 3d printed.</p>
       
 
+       <!-- Slideshow (no dots, no drag) -->
+      <section class="slideshow" data-autoplay="true" data-interval="3200" aria-roledescription="carousel">
+        <div class="slides" role="group" aria-live="polite">
+
+
+          <!-- 2 -->
+          <figure class="slide">
+            <img src="../images/car_02.png" alt="Powertrain"/>
+            <figcaption class="caption">
+              <h3 class="subtitle">Drone</h3>
+              <p class="desc">This is the final drone design. The drone here has its arms out although they can fold in. We can also see the camera at the bottom of the drone and the wind blocking shield on the sides.</p>
+            </figcaption>
+          </figure>
+
+          <!-- 3: MIDDLE -->
+          <figure class="slide">
+            <img src="../images/car_03.png" alt="Inventor engine assembly"/>
+            <figcaption class="caption">
+              <h3 class="subtitle">Exploded View</h3>
+              <p class="desc">Here we can see an exploded view of the drone. We can really see all the details of the drone and its electrics which allow it to work. A big part of this project for me was learning and understanding basic electric system layouts.</p>
+            </figcaption>
+          </figure>
+
+          <!-- 4 -->
+          <figure class="slide">
+            <img src="../images/car_04.png" alt="SolidWorks FEA results"/>
+            <figcaption class="caption">
+              <h3 class="subtitle">Drone Arms</h3>
+              <p class="desc">The arms on the drone are my personal favourite part on this project. It has sleek aesthetics while being extremely lightweight allowing for the perfect amount of strength for its job, The center line on the mesh is actually at and angle to allow for more strength where it is needed, this need was determined using FEA do understand where the stress points where. The little side hole on the back block is a magnet mount so the arm doesn't move during flight while still allowing for the drone to fold up. </p>
+            </figcaption>
+          </figure>
+
+
+        </div>
+
+        <!-- Navigation -->
+        <button class="nav-btn prev" aria-label="Previous slide">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="nav-btn next" aria-label="Next slide">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </section>
+
+      <!-- Styles -->
+      <style>
+        /* Avoid layout-induced drift: lock widths and remove gaps */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        .slideshow {
+          --h: 520px;
+          --btn-size: 42px;
+          position: relative;
+          overflow: hidden;
+          border-radius: 16px;
+          box-shadow: 0 8px 24px rgba(0,0,0,.12);
+          background: #000;
+          max-width: 1000px;
+          margin: 1.75rem auto;
+        }
+        .slides {
+          display: flex;
+          height: var(--h);
+          width: 100%;
+          transition: transform .5s ease;
+          will-change: transform;
+        }
+        .slide {
+          min-width: 100%;   /* exact page width */
+          height: var(--h);
+          position: relative;
+          margin: 0;         /* no margins that can cause drift */
+          padding: 0;
+        }
+        .slide img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+
+        .caption {
+          position: absolute; inset: auto 0 0 0;
+          background: linear-gradient(transparent, rgba(0,0,0,.75) 40%, rgba(0,0,0,.9));
+          color: #fff; padding: .9rem 1rem 1.2rem 1rem;
+          text-align: center;
+        }
+        .caption .subtitle { margin: 0 0 .35rem; font: 700 16px/1.3 system-ui, sans-serif; }
+        .caption .desc { margin: 0 auto; font: 400 14px/1.5 system-ui, sans-serif; max-width: 800px; }
+
+        .nav-btn {
+          position: absolute; top: 50%; transform: translateY(-50%);
+          width: var(--btn-size); height: var(--btn-size);
+          border-radius: 999px; border: none; cursor: pointer;
+          background: rgba(255,255,255,.85);
+          display: grid; place-items: center;
+        }
+        .nav-btn:hover { background: #fff; }
+        .prev { left: .5rem; }
+        .next { right: .5rem; }
+        .nav-btn svg { width: 22px; height: 22px; }
+
+        @media (max-width: 640px) {
+          .slideshow { --h: 380px; }
+          .nav-btn { display: none; }
+        }
+      </style>
+
+      <!-- Script (no dots, no drag; exact 100% steps to prevent drift) -->
+      <script>
+        (function(){
+          const slideshow = document.currentScript.previousElementSibling.previousElementSibling;
+          const track = slideshow.querySelector('.slides');
+          const slides = Array.from(slideshow.querySelectorAll('.slide'));
+          const btnPrev = slideshow.querySelector('.prev');
+          const btnNext = slideshow.querySelector('.next');
+
+          let index = 0;
+          const autoplay = slideshow.getAttribute('data-autoplay') === 'true';
+          const interval = parseInt(slideshow.getAttribute('data-interval') || '3500', 10);
+          let timer = null;
+
+          function update() {
+            const x = -index * 100; // whole-number percentage avoids cumulative rounding
+            track.style.transform = `translate3d(${x}%, 0, 0)`;
+          }
+          function goTo(i, restart=true) {
+            index = (i + slides.length) % slides.length;
+            update();
+            if (restart) restartAutoplay();
+          }
+          function next(restart=true){ goTo(index + 1, restart); }
+          function prev(restart=true){ goTo(index - 1, restart); }
+
+          btnNext.addEventListener('click', () => next(true));
+          btnPrev.addEventListener('click', () => prev(true));
+
+          // Keyboard support
+          slideshow.tabIndex = 0;
+          slideshow.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') next(true);
+            if (e.key === 'ArrowLeft')  prev(true);
+          });
+
+          function startAutoplay(){
+            if (!autoplay) return;
+            stopAutoplay();
+            timer = setInterval(() => next(false), interval);
+          }
+          function stopAutoplay(){ if (timer) { clearInterval(timer); timer = null; } }
+          function restartAutoplay(){ stopAutoplay(); startAutoplay(); }
+
+          // Optional: pause on hover
+          slideshow.addEventListener('mouseenter', stopAutoplay);
+          slideshow.addEventListener('mouseleave', startAutoplay);
+
+          // Initialize
+          update();
+          startAutoplay();
+
+          // Re-align on resize (keeps things tight if viewport changes)
+          window.addEventListener('resize', update);
+        })();
+      </script>
+    </article>
+      
       <!-- PDF Auto-Slideshow -->
       <section class="pdfshow" id="pdfShow"
                data-src="../images/Copy of Engineering Project Proposal by Slidesgo.pdf"
