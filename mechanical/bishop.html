@@ -1,1 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dunkirk frc5409</title>
+  <link rel="stylesheet" href="../style.css"/>
+</head>
+<body>
+  <header>
+    <nav class="container nav-bar">
+      <div class="nav-left breadcrumb"><a href="../index.html">Adhams Portfolio</a>/<a href="../mechanical.html">mechanical</a>/Dunkirk<span class="cursor"></span></div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../software.html">Software</a></li>
+        <li><a href="../mechanical.html">Mechanical</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container projects">
+    <article class="post-article">
+      <div class="post-image"><img src="../images/Bishop.jpeg" alt="Post Image"/></div>
+      <h1>Mechanical Innovation</h1>
+
+      <!-- Intro paragraph -->
+      <p>This project is Bishop, an award winning, world championship playoff robot. This robot was ranked 18th in ontario and was a key part of an alliance that came 2nd in the hardest district event in the world. My role on this team was as the team captain, lead designer and the lead scouter. Primarily as a designer I worked on designing the Gearbox and chasis subsystems. I also assisted in the design of the intake and claw subsytems.</p>
+
+      <!-- Four images (2 of them download PDFs) -->
+      <section class="image-quad">
+        <!-- 1 — Click image to download PDF -->
+        <figure>
+          <a href="../images/binder.pdf" download title="Download: binder.pdf">
+            <img src="../images/bishopcad.jpg" alt="Concept sketches and proportions board"/>
+          </a>
+          <figcaption>
+            <h3>Robot</h3>
+            <p>If you click this image you can look through the technical binder for this project where you can see details of all the diffrent parts of the robot.</p>
+          </figcaption>
+        </figure>
+
+        <!-- 2 — Plain image with caption paragraph -->
+        <figure>
+          <img src="../images/chasis.jpg" alt="Excel sheet with gear ratio and tractive effort calculations"/>
+          <figcaption>
+            <h3>Chasis</h3>
+            <p>This is the Chasis Over the course of the season I had 2 main roles with the chasis. Firstly during the off-season I updated the chasis parametric model, which allows the team to create a chasis using global variables linked to excel, I used tools like ilogic on inventor in order to make this happen and update the chasis. During the season I helped push the chasis over the finish line in order to fix some issues with the spacing and center drop of the wheels.</p>
+          </figcaption>
+        </figure>
+
+        <!-- 3 — Plain image with caption paragraph -->
+        <figure>
+          <img src="../images/gbx.jpg" alt="Inventor assembly of engine, bellhousing, and transmission"/>
+          <figcaption>
+            <h3>gearbox</h3>
+            <p>This gearbox is a 3 motor single speed gearbox, It is easily adjustable to diffrent gear ratios and features 2 gear reductions. The gearbox helps the robot output 6.3 horsepower and 164 lb-ft of torque. it reaches a top speed of 17 ft per second which consedering the small feild size is more than fast enough.</p>
+          </figcaption>
+        </figure>
+
+        <!-- 4 — Click image to download PDF -->
+        <figure>
+          <a href="../images/gbxdrawings.pdf" download title="Download: gbxdrawings.pdf">
+            <img src="../images/gbxdrawings.jpg" alt="Final CAD exploded view of the custom car"/>
+          </a>
+          <figcaption>
+            <h3>Gearbox drawings</h3>
+            <p>Here is the assembelly drawing for the gearbox system. If you click this image you can download the full set of engineering drawings.</p>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- Minimal, page-scoped styles (kept here so your global head stays the same) -->
+      <style>
+        .image-quad{
+          --gap: 14px;
+          max-width: 1000px;
+          margin: 1.25rem auto 2rem;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: var(--gap);
+        }
+        .image-quad figure{ margin:0; background:#fff0; }
+        .image-quad img{
+          width:100%; aspect-ratio: 4/3; object-fit: cover; display:block;
+          border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,.12);
+          transition: transform .18s ease, box-shadow .18s ease;
+          background:#eee;
+        }
+        .image-quad a:hover img{
+          transform: translateY(-2px);
+          box-shadow: 0 10px 24px rgba(0,0,0,.16);
+        }
+        .image-quad figcaption{
+          text-align:left; margin-top:.55rem;
+          font: 500 14px/1.55 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+          color:#333;
+        }
+        .image-quad h3{
+          margin:.1rem 0 .35rem; font: 700 16px/1.3 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        }
+        .image-quad p{ margin:0; color:#444; }
+        @media (max-width: 720px){
+          .image-quad{ grid-template-columns: 1fr; }
+        }
+      </style>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container"><p>&copy; 2025 Adham Abdelrahim.</p></div>
+  </footer>
+  <script src="../script.js"></script>
+</body>
+</html>
 
