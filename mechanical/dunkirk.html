@@ -1,1 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mechanical Innovation - My Portfolio</title>
+  <link rel="stylesheet" href="../style.css"/>
+</head>
+<body>
+  <header>
+    <nav class="container nav-bar">
+      <div class="nav-left breadcrumb"><a href="../index.html">Adhams Portfolio</a>/<a href="../mechanical.html">mechanical</a>/Dunkirk<span class="cursor"></span></div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../software.html">Software</a></li>
+        <li><a href="../mechanical.html">Mechanical</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="container projects">
+    <article class="post-article">
+      <div class="post-image"><img src="../images/Dunkirk.jpg" alt="Post Image"/></div>
+      <h1>Mechanical Innovation</h1>
 
+      <!-- Starting paragraph -->
+      <p>This is Dunkirk, a 3 times district event winner, multi-award winning robot which finished 4th in Ontario and qualified for world championships. My primary role on this robot was leading the design of the intake and designing the hooks which would hold the wheight of the robot as it hung from bars.</p>
+
+      <!-- Slideshow (no dots, no drag) -->
+      <section class="slideshow" data-autoplay="true" data-interval="3200" aria-roledescription="carousel">
+        <div class="slides" role="group" aria-live="polite">
+
+          <!-- 1: FIRST (downloadable) -->
+          <figure class="slide">
+            <a href="../images/IntakeCad.pdf" download title="Download: intakeCad.pdf">
+              <img src="../images/intakedwg.png" alt="Car"/>
+            </a>
+            <figcaption class="caption">
+              <h3 class="subtitle">Intake Mk3 drawings</h3>
+              <p class="desc">The following is the final ittiration of the intake. Alhtough it was manufactured it did not make it onto final competition robot, due to the fact that the intake team determined it would not be a massive diffrence to the performance. It is a 4 bar linkage powered by 2 pnuematic cylinders to go up and down to come in and out of the robot frame in order to keep the intake protected when its not in use. If you want to go through the drawings they are linked to this picture.</p>
+            </figcaption>
+          </figure>
+
+          <!-- 2 -->
+          <figure class="slide">
+            <img src="../images/hooks.png" alt="Powertrain"/>
+            <figcaption class="caption">
+              <h3 class="subtitle">Hooks</h3>
+              <p class="desc">This hook project was my intro to FEA which allows you to look at how parts will handle loads and moments. When I was given this hook it initially had a safety factor of less than 1 meaning it would have broken with the load it was going to be put under. After tweaks which I repared all the little bits of it which allowed me to reach a safety factor of 14 (it could handle 14 times its load.) I could identify these weak points due to FEA which highlighted all the areas which would have failed. </p>
+            </figcaption>
+          </figure>
+
+          <!-- 3: MIDDLE -->
+          <figure class="slide">
+            <img src="../images/intake.png" alt="Inventor engine assembly"/>
+            <figcaption class="caption">
+              <h3 class="subtitle">Intake Mk2</h3>
+              <p class="desc">This was the final intake which was used in competition. It consited of a 4 bar linkage which would raise and lower in order to both comply with the rules and pick up balls. It used 2 horizontal rollers in order to control the game pieces. It also used pnuematics in order to raise and loweer itself.</p>
+            </figcaption>
+          </figure>
+
+        </div>
+
+        <!-- Navigation -->
+        <button class="nav-btn prev" aria-label="Previous slide">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="nav-btn next" aria-label="Next slide">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </section>
+
+      <!-- Styles -->
+      <style>
+        /* Avoid layout-induced drift: lock widths and remove gaps */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        .slideshow {
+          --h: 520px;
+          --btn-size: 42px;
+          position: relative;
+          overflow: hidden;
+          border-radius: 16px;
+          box-shadow: 0 8px 24px rgba(0,0,0,.12);
+          background: #000;
+          max-width: 1000px;
+          margin: 1.75rem auto;
+        }
+        .slides {
+          display: flex;
+          height: var(--h);
+          width: 100%;
+          transition: transform .5s ease;
+          will-change: transform;
+        }
+        .slide {
+          min-width: 100%;   /* exact page width */
+          height: var(--h);
+          position: relative;
+          margin: 0;         /* no margins that can cause drift */
+          padding: 0;
+        }
+        .slide img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+
+        .caption {
+          position: absolute; inset: auto 0 0 0;
+          background: linear-gradient(transparent, rgba(0,0,0,.75) 40%, rgba(0,0,0,.9));
+          color: #fff; padding: .9rem 1rem 1.2rem 1rem;
+          text-align: center;
+        }
+        .caption .subtitle { margin: 0 0 .35rem; font: 700 16px/1.3 system-ui, sans-serif; }
+        .caption .desc { margin: 0 auto; font: 400 14px/1.5 system-ui, sans-serif; max-width: 800px; }
+
+        .nav-btn {
+          position: absolute; top: 50%; transform: translateY(-50%);
+          width: var(--btn-size); height: var(--btn-size);
+          border-radius: 999px; border: none; cursor: pointer;
+          background: rgba(255,255,255,.85);
+          display: grid; place-items: center;
+        }
+        .nav-btn:hover { background: #fff; }
+        .prev { left: .5rem; }
+        .next { right: .5rem; }
+        .nav-btn svg { width: 22px; height: 22px; }
+
+        @media (max-width: 640px) {
+          .slideshow { --h: 380px; }
+          .nav-btn { display: none; }
+        }
+      </style>
+
+      <!-- Script (no dots, no drag; exact 100% steps to prevent drift) -->
+      <script>
+        (function(){
+          const slideshow = document.currentScript.previousElementSibling.previousElementSibling;
+          const track = slideshow.querySelector('.slides');
+          const slides = Array.from(slideshow.querySelectorAll('.slide'));
+          const btnPrev = slideshow.querySelector('.prev');
+          const btnNext = slideshow.querySelector('.next');
+
+          let index = 0;
+          const autoplay = slideshow.getAttribute('data-autoplay') === 'true';
+          const interval = parseInt(slideshow.getAttribute('data-interval') || '3500', 10);
+          let timer = null;
+
+          function update() {
+            const x = -index * 100; // whole-number percentage avoids cumulative rounding
+            track.style.transform = `translate3d(${x}%, 0, 0)`;
+          }
+          function goTo(i, restart=true) {
+            index = (i + slides.length) % slides.length;
+            update();
+            if (restart) restartAutoplay();
+          }
+          function next(restart=true){ goTo(index + 1, restart); }
+          function prev(restart=true){ goTo(index - 1, restart); }
+
+          btnNext.addEventListener('click', () => next(true));
+          btnPrev.addEventListener('click', () => prev(true));
+
+          // Keyboard support
+          slideshow.tabIndex = 0;
+          slideshow.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') next(true);
+            if (e.key === 'ArrowLeft')  prev(true);
+          });
+
+          function startAutoplay(){
+            if (!autoplay) return;
+            stopAutoplay();
+            timer = setInterval(() => next(false), interval);
+          }
+          function stopAutoplay(){ if (timer) { clearInterval(timer); timer = null; } }
+          function restartAutoplay(){ stopAutoplay(); startAutoplay(); }
+
+          // Optional: pause on hover
+          slideshow.addEventListener('mouseenter', stopAutoplay);
+          slideshow.addEventListener('mouseleave', startAutoplay);
+
+          // Initialize
+          update();
+          startAutoplay();
+
+          // Re-align on resize (keeps things tight if viewport changes)
+          window.addEventListener('resize', update);
+        })();
+      </script>
+    </article>
+  </main>
+  <footer>
+    <div class="container"><p>&copy; 2025 Adham Abdelrahim.</p></div>
+  </footer>
+  <script src="../script.js"></script>
+</body>
+</html>
