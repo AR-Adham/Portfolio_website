@@ -40,7 +40,7 @@
     </div>
   </section>
 
-  <section id="posts" class="projects">
+  <!-- <section id="posts" class="projects">
     <div class="container">
       <h2>Latest Posts</h2>
       <div class="post-list">
@@ -61,7 +61,25 @@
         </article>
       </div>
     </div>
-  </section>
+  </section> -->
+
+  <section id="posts" class="projects">
+  <div class="container">
+    <h2>Latest Posts</h2>
+
+    <div class="post-scroller-wrap">
+      <button class="scroll-btn prev" aria-label="Scroll left">‹</button>
+
+      <div class="post-scroller" id="post-scroller" aria-live="polite">
+        <div class="post-skeleton"></div>
+        <div class="post-skeleton"></div>
+        <div class="post-skeleton"></div>
+      </div>
+
+      <button class="scroll-btn next" aria-label="Scroll right">›</button>
+    </div>
+  </div>
+</section>
 
   <section id="about" class="projects alt-bg">
     <div class="container">
