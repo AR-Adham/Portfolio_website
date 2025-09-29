@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Fox and Cayote enclosure simulation",
+    "excerpt": "A breakdown of a simulation developed for Sandy Pines Wildlife Center.",
+    "url": "software/post1.html",
+    "cover": "apsc103group.jpg",
+    "category": "software",
+    "createdAt": "2025-05-01"
+  },
+  {
+    "title": "Car Project",
+    "excerpt": "The complete OR-12 car capstone project.",
+    "url": "mechanical/post2.html",
+    "cover": "images/car_01.png",
+    "category": "mechanical",
+    "createdAt": "2023-06-01"
+  },
+  {
+    "title": "Bishop Chasis and Gearbox",
+    "excerpt": "My design work on frc5409's robot Bishop.",
+    "url": "mechanical/bishop.html",
+    "cover": "images/Bishop.jpeg",
+    "category": "mechanical",
+    "createdAt": "2023-05-01"
+  },
+  {
+    "title": "Dunkirk Intake",
+    "excerpt": "My design work on frc5409's robot Dunkirk.",
+    "url": "mechanical/dunkirk.html",
+    "cover": "images/Dunkirk.jpg",
+    "category": "mechanical",
+    "createdAt": "2023-05-01"
+  },
+  {
+    "title": "Drone Project",
+    "excerpt": "Grade 11 Design Project",
+    "url": "mechanical/drone_post.html",
+    "cover": "images/drone.png",
+    "category": "mechanical",
+    "createdAt": "2022-06-01"
+  }
+]
