@@ -252,6 +252,10 @@ footer p { color: #555; font-size: 0.9rem; }
   }
 }
 
+/* ——— Global image safety ——— */
+img { max-width: 100%; height: auto; display: block; }
+
+/* ——— Scroller layout ——— */
 .post-scroller-wrap {
   position: relative;
   display: grid;
@@ -263,18 +267,20 @@ footer p { color: #555; font-size: 0.9rem; }
 .scroll-btn {
   inline-size: 42px;
   block-size: 42px;
-  border: none;
+  border: 0;
   border-radius: 50%;
   background: rgba(0,0,0,.06);
   box-shadow: 0 2px 8px rgba(0,0,0,.12);
   cursor: pointer;
   font-size: 1.25rem;
   line-height: 1;
+  user-select: none;
 }
 .scroll-btn:hover { background: rgba(0,0,0,.1); }
 
 .post-scroller {
   display: flex;
+  align-items: stretch;     /* fixes odd vertical centering */
   gap: 1rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
@@ -282,22 +288,24 @@ footer p { color: #555; font-size: 0.9rem; }
   scroll-behavior: smooth;
 }
 
+/* ——— Card ——— */
 .post-card {
-  flex: 0 0 300px;
+  display: flex;            /* robust against old grid rules */
+  flex-direction: column;
+  text-align: left;         /* ensures no inherited centering */
+  flex: 0 0 300px;          /* fixed card width for scroller */
   background: #fff;
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 6px 18px rgba(0,0,0,.12);
   scroll-snap-align: start;
-  display: grid;
-  grid-template-rows: 170px auto;
 }
 
 .post-cover {
   width: 100%;
-  height: 170px;
+  height: 180px;
   object-fit: cover;
-  display: block;
+  object-position: center;  /* centers the crop */
   background: #eee;
 }
 
@@ -314,11 +322,7 @@ footer p { color: #555; font-size: 0.9rem; }
   line-height: 1.25;
 }
 
-.post-excerpt {
-  margin: 0;
-  color: #555;
-  font-size: .95rem;
-}
+.post-excerpt { margin: 0; color: #555; font-size: .95rem; }
 
 .post-meta {
   display: flex;
@@ -339,7 +343,7 @@ footer p { color: #555; font-size: 0.9rem; }
 /* Skeletons while loading */
 .post-skeleton {
   flex: 0 0 300px;
-  height: 240px;
+  height: 260px;
   border-radius: 14px;
   background: linear-gradient(90deg, #eee, #f5f5f5, #eee);
   background-size: 200% 100%;
