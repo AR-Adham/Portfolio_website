@@ -161,3 +161,115 @@ const hamburger = document.querySelector('.hamburger');
 })();
 </script>
 
+document.addEventListener('DOMContentLoaded', () => {
+  const scroller = document.getElementById('post-scroller');
+  if (!scroller) return;
+
+  const CATEGORIES = new Set(['mechanical','software','general']);
+
+  // Resolve posts.json relative to the current page
+  const manifestUrl = new URL('posts.json', window.location.href);
+  // Cache bust (helps with GitHub Pages)
+  manifestUrl.searchParams.set('v', Date.now().toString());
+
+  function formatDate(iso) {
+    if (!iso) return '';
+    const d = new Date(iso + 'T00:00:00');
+    return d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'});
+  }
+
+  function createCard(post) {
+    const a = document.createElement('a');
+    a.href = post.url;
+    a.className = 'post-card';
+    a.setAttribute('aria-label', post.title || 'Post');
+
+    const img = document.createElement('img');
+    img.className = 'post-cover';
+    img.alt = post.title || '';
+    img.loading = 'lazy';
+    img.src = post.cover || 'assets/placeholder.jpg';  // ensure this exists or change it
+    a.appendChild(img);
+
+    const body = document.createElement('div');
+    body.className = 'post-body';
+
+    const h3 = document.createElement('h3');
+    h3.className = 'post-title';
+    h3.textContent = post.title || 'Untitled';
+    body.appendChild(h3);
+
+    if (post.excerpt) {
+      const p = document.createElement('p');
+      p.className = 'post-excerpt';
+      p.textContent = post.excerpt;
+      body.appendChild(p);
+    }
+
+    const meta = document.createElement('div');
+    meta.className = 'post-meta';
+
+    const badge = document.createElement('span');
+    badge.className = 'badge';
+    badge.textContent = post.category || '';
+    meta.appendChild(badge);
+
+    const time = document.createElement('time');
+    time.dateTime = post.createdAt || '';
+    time.textContent = formatDate(post.createdAt);
+    meta.appendChild(time);
+
+    body.appendChild(meta);
+    a.appendChild(body);
+
+    return a;
+  }
+
+  async function loadPosts() {
+    try {
+      const res = await fetch(manifestUrl.href, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`Failed to load posts.json (${res.status})`);
+      const json = await res.json();
+
+      if (!Array.isArray(json)) throw new Error('posts.json must be an array');
+
+      const posts = json
+        .filter(p => p && CATEGORIES.has(String(p.category || '').toLowerCase()) && p.url)
+        .map(p => ({
+          title: p.title || '',
+          excerpt: p.excerpt || '',
+          url: p.url,
+          cover: p.cover || '',
+          category: String(p.category || '').toLowerCase(),
+          createdAt: p.createdAt || ''
+        }))
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+      // Clear skeletons
+      scroller.innerHTML = '';
+
+      // Render
+      posts.forEach(p => scroller.appendChild(createCard(p)));
+
+      // Buttons
+      const wrap = scroller.closest('.post-scroller-wrap');
+      const btnPrev = wrap?.querySelector('.scroll-btn.prev');
+      const btnNext = wrap?.querySelector('.scroll-btn.next');
+      const step = 320; // ≈ card width + gap
+
+      btnPrev?.addEventListener('click', () => scroller.scrollBy({ left: -step, behavior: 'smooth' }));
+      btnNext?.addEventListener('click', () => scroller.scrollBy({ left: step, behavior: 'smooth' }));
+
+      // Debug helper
+      window.__postsDebug = () => ({ manifestUrl: manifestUrl.href, count: posts.length, posts });
+
+    } catch (err) {
+      console.error('[posts] ', err);
+      scroller.innerHTML = '<div style="opacity:.7;padding:1rem">Couldn’t load posts. Check <code>posts.json</code> path & format.</div>';
+    }
+  }
+
+  loadPosts();
+});
+
+
