@@ -63,23 +63,29 @@
     </div>
   </section> -->
 
-  <section id="posts" class="projects">
+<section id="posts" class="projects">
   <div class="container">
     <h2>Latest Posts</h2>
 
     <div class="post-scroller-wrap">
-      <button class="scroll-btn prev" aria-label="Scroll left">‹</button>
+      <button class="scroll-btn prev" aria-label="Scroll left" type="button">‹</button>
 
-      <div class="post-scroller" id="post-scroller" aria-live="polite">
-        <div class="post-skeleton"></div>
-        <div class="post-skeleton"></div>
-        <div class="post-skeleton"></div>
+      <div class="post-scroller" id="post-scroller" aria-live="polite" role="list">
+        <!-- skeletons while loading -->
+        <div class="post-skeleton" aria-hidden="true"></div>
+        <div class="post-skeleton" aria-hidden="true"></div>
+        <div class="post-skeleton" aria-hidden="true"></div>
       </div>
 
-      <button class="scroll-btn next" aria-label="Scroll right">›</button>
+      <button class="scroll-btn next" aria-label="Scroll right" type="button">›</button>
     </div>
+
+    <noscript>
+      <p>Enable JavaScript to see the latest posts.</p>
+    </noscript>
   </div>
 </section>
+
 
   <section id="about" class="projects alt-bg">
     <div class="container">
