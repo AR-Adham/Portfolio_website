@@ -88,6 +88,18 @@ body {
   margin: 0 auto;
 }
 
+.hero-headshot {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+
+  /* makes it pop over background */
+  border: 3px solid white;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
 .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
 .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
 
