@@ -77,11 +77,9 @@ body {
 /* Hero */
 .hero {
   background: url('hero.jpg') center/cover no-repeat;
+  height: 80vh;
   display: flex;
-  flex-direction: column;
   align-items: center;  
-  justify-content: center;
-  text-align: center;
 }
 
 .hero-content {
@@ -90,13 +88,12 @@ body {
   margin: 0 auto;
 }
 
-.hero-headshot {
-  align-items: center;  
+.hero-headshot {  
   width: 150px;
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   border: 3px solid white;
   box-shadow: 0 6px 20px rgba(0,0,0,0.4);
 
