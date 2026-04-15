@@ -89,6 +89,8 @@ body {
 }
 
 .hero-headshot {
+  display: block;          
+  margin: 0 auto 20px auto;
   width: 140px;
   height: 140px;
   border-radius: 50%;
